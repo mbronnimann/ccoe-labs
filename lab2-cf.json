@@ -1,0 +1,577 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "CCoE AWS Lab 2 - VPC setup.",
+
+  "Resources": {
+    "itsccoelab02vpc01": {
+      "Type": "AWS::EC2::VPC",
+      "Properties": {
+        "CidrBlock": "192.168.15.0/24",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value":  {
+              "Fn::Join": [
+                "",
+                [
+                  "VPC - ",
+                  {
+                    "Ref": "InputLabName"
+                  }
+                ]
+              ]
+            }
+          },
+          {
+            "Key": "ccoe-solution-id",
+            "Value": {"Ref": "InputCCoESolutionId"}
+          }
+        ]
+      }
+    },
+    "itsccoelab02pubazadmz": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {
+          "Ref": "itsccoelab02vpc01"
+        },
+        "CidrBlock": "192.168.15.0/27",
+        "AvailabilityZone": {
+          "Fn::Select": [
+            "0",
+            {
+              "Fn::GetAZs": {
+                "Ref": "AWS::Region"
+              }
+            }
+          ]
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": {
+              "Fn::Join": [
+                "",
+                [
+                  "its-ccoelab02-pub-aza-dmz - ",
+                  {
+                    "Ref": "InputLabName"
+                  }
+                ]
+              ]
+            }
+          },
+          {
+            "Key": "ccoe-solution-id",
+            "Value": {"Ref": "InputCCoESolutionId"}
+          }
+        ]
+      }
+    },
+    "itsccoelab02pubazbdmz": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {
+          "Ref": "itsccoelab02vpc01"
+        },
+        "CidrBlock": "192.168.15.32/27",
+        "AvailabilityZone": {
+          "Fn::Select": [
+            "1",
+            {
+              "Fn::GetAZs": {
+                "Ref": "AWS::Region"
+              }
+            }
+          ]
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": {
+              "Fn::Join": [
+                "",
+                [
+                  "its-ccoelab02-pub-azb-dmz - ",
+                  {
+                    "Ref": "InputLabName"
+                  }
+                ]
+              ]
+            }
+          },
+          {
+            "Key": "ccoe-solution-id",
+            "Value": {"Ref": "InputCCoESolutionId"}
+          }
+        ]
+      }
+    },
+    "itsccoelab02priazaapp": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {
+          "Ref": "itsccoelab02vpc01"
+        },
+        "CidrBlock": "192.168.15.64/26",
+        "AvailabilityZone": {
+          "Fn::Select": [
+            "0",
+            {
+              "Fn::GetAZs": {
+                "Ref": "AWS::Region"
+              }
+            }
+          ]
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": {
+              "Fn::Join": [
+                "",
+                [
+                  "its-ccoelab02-pri-aza-app - ",
+                  {
+                    "Ref": "InputLabName"
+                  }
+                ]
+              ]
+            }
+          },
+          {
+            "Key": "ccoe-solution-id",
+            "Value": {"Ref": "InputCCoESolutionId"}
+          }
+        ]
+      }
+    },
+    "itsccoelab02priazbapp": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {
+          "Ref": "itsccoelab02vpc01"
+        },
+        "CidrBlock": "192.168.15.128/26",
+        "AvailabilityZone": {
+          "Fn::Select": [
+            "1",
+            {
+              "Fn::GetAZs": {
+                "Ref": "AWS::Region"
+              }
+            }
+          ]
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": {
+              "Fn::Join": [
+                "",
+                [
+                  "its-ccoelab02-pri-azb-app - ",
+                  {
+                    "Ref": "InputLabName"
+                  }
+                ]
+              ]
+            }
+          },
+          {
+            "Key": "ccoe-solution-id",
+            "Value": {"Ref": "InputCCoESolutionId"}
+          }
+        ]
+      }
+    },
+    "itsccoelab02priazadb": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {
+          "Ref": "itsccoelab02vpc01"
+        },
+        "CidrBlock": "192.168.15.192/27",
+        "AvailabilityZone": {
+          "Fn::Select": [
+            "0",
+            {
+              "Fn::GetAZs": {
+                "Ref": "AWS::Region"
+              }
+            }
+          ]
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": {
+              "Fn::Join": [
+                "",
+                [
+                  "its-ccoelab02-pri-aza-db - ",
+                  {
+                    "Ref": "InputLabName"
+                  }
+                ]
+              ]
+            }
+          },
+          {
+            "Key": "ccoe-solution-id",
+            "Value": {"Ref": "InputCCoESolutionId"}
+          }
+        ]
+      }
+    },
+    "itsccoelab02priazbdb": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {
+          "Ref": "itsccoelab02vpc01"
+        },
+        "CidrBlock": "192.168.15.224/27",
+        "AvailabilityZone": {
+          "Fn::Select": [
+            "1",
+            {
+              "Fn::GetAZs": {
+                "Ref": "AWS::Region"
+              }
+            }
+          ]
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": {
+              "Fn::Join": [
+                "",
+                [
+                  "its-ccoelab02-pri-azb-db - ",
+                  {
+                    "Ref": "InputLabName"
+                  }
+                ]
+              ]
+            }
+          },
+          {
+            "Key": "ccoe-solution-id",
+            "Value": {"Ref": "InputCCoESolutionId"}
+          }
+        ]
+      }
+    },
+    "DBSubnetGroup" : {
+       "Type" : "AWS::RDS::DBSubnetGroup",
+       "Properties" : {
+          "DBSubnetGroupDescription" : "DB Subnet Group for ccoelab02 VPC",
+          "SubnetIds" : [ {"Ref" : "itsccoelab02priazadb"}, {"Ref" : "itsccoelab02priazbdb"} ],
+          "Tags" : [
+            {
+              "Key" : "Name",
+              "Value" : {
+                "Fn::Join": [
+                    "",
+                    [
+                      "ccoelab02-vpc-db-subnet-group - ",
+                      {
+                        "Ref": "InputLabName"
+                      }
+                    ]
+                  ]
+                }
+              },
+              {
+                "Key": "ccoe-solution-id",
+                "Value": {"Ref": "InputCCoESolutionId"}
+              }
+            ]
+       }
+    },
+
+    "InternetGateway": {
+      "Type": "AWS::EC2::InternetGateway",
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": {
+              "Fn::Join": [
+                "",
+                [
+                  "its-ccoelab02-igw - ",
+                  {
+                    "Ref": "InputLabName"
+                  }
+                ]
+              ]
+            }
+          },
+          {
+            "Key": "ccoe-solution-id",
+            "Value": {"Ref": "InputCCoESolutionId"}
+          }
+        ]
+      }
+    },
+    "GatewayToInternet": {
+      "Type": "AWS::EC2::VPCGatewayAttachment",
+      "Properties": {
+        "VpcId": {
+          "Ref": "itsccoelab02vpc01"
+        },
+        "InternetGatewayId": {
+          "Ref": "InternetGateway"
+        }
+      }
+    },
+    "NATGatewayAZA": {
+      "DependsOn": "GatewayToInternet",
+      "Type": "AWS::EC2::NatGateway",
+      "Properties": {
+        "AllocationId": {
+          "Fn::GetAtt": [
+            "EIP",
+            "AllocationId"
+          ]
+        },
+        "SubnetId": {
+          "Ref": "itsccoelab02pubazadmz"
+        }
+      }
+    },
+    "EIP": {
+      "Type": "AWS::EC2::EIP",
+      "Properties": {
+        "Domain": "vpc"
+      }
+    },
+    "NATGatewayAZB": {
+      "DependsOn": "GatewayToInternet",
+      "Type": "AWS::EC2::NatGateway",
+      "Properties": {
+        "AllocationId": {
+          "Fn::GetAtt": [
+            "EIP2",
+            "AllocationId"
+          ]
+        },
+        "SubnetId": {
+          "Ref": "itsccoelab02pubazbdmz"
+        }
+      }
+    },
+    "EIP2": {
+      "Type": "AWS::EC2::EIP",
+      "Properties": {
+        "Domain": "vpc"
+      }
+    },
+    "itsccoelab02pubazallrt": {
+      "Type": "AWS::EC2::RouteTable",
+      "Properties": {
+        "VpcId": {
+          "Ref": "itsccoelab02vpc01"
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": {
+              "Fn::Join": [
+                "",
+                [
+                  "its-ccoelab02-pub-az*-rt - ",
+                  {
+                    "Ref": "InputLabName"
+                  }
+                ]
+              ]
+            }
+          },
+          {
+            "Key": "ccoe-solution-id",
+            "Value": {"Ref": "InputCCoESolutionId"}
+          }
+        ]
+      }
+    },
+    "itsccoelab02priazart": {
+      "Type": "AWS::EC2::RouteTable",
+      "Properties": {
+        "VpcId": {
+          "Ref": "itsccoelab02vpc01"
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": {
+              "Fn::Join": [
+                "",
+                [
+                  "its-ccoelab02-pri-aza-rt - ",
+                  {
+                    "Ref": "InputLabName"
+                  }
+                ]
+              ]
+            }
+          },
+          {
+            "Key": "ccoe-solution-id",
+            "Value": {"Ref": "InputCCoESolutionId"}
+          }
+        ]
+      }
+    },
+    "itsccoelab02priazbrt": {
+      "Type": "AWS::EC2::RouteTable",
+      "Properties": {
+        "VpcId": {
+          "Ref": "itsccoelab02vpc01"
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": {
+              "Fn::Join": [
+                "",
+                [
+                  "its-ccoelab02-pri-azb-rt - ",
+                  {
+                    "Ref": "InputLabName"
+                  }
+                ]
+              ]
+            }
+          },
+          {
+            "Key": "ccoe-solution-id",
+            "Value": {"Ref": "InputCCoESolutionId"}
+          }
+        ]
+      }
+    },
+    "PublicRoute": {
+      "Type": "AWS::EC2::Route",
+      "DependsOn": "GatewayToInternet",
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "itsccoelab02pubazallrt"
+        },
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "GatewayId": {
+          "Ref": "InternetGateway"
+        }
+      }
+    },
+    "PrivateRouteAZA": {
+      "Type": "AWS::EC2::Route",
+      "DependsOn": "NATGatewayAZA",
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "itsccoelab02priazart"
+        },
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "NatGatewayId": {
+          "Ref": "NATGatewayAZA"
+        }
+      }
+    },
+
+    "PrivateRouteAZB": {
+      "Type": "AWS::EC2::Route",
+      "DependsOn": "NATGatewayAZB",
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "itsccoelab02priazbrt"
+        },
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "NatGatewayId": {
+          "Ref": "NATGatewayAZB"
+        }
+      }
+    },
+
+    "PublicSubnetRouteTableAssociation1": {
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+      "Properties": {
+        "SubnetId": {
+          "Ref": "itsccoelab02pubazadmz"
+        },
+        "RouteTableId": {
+          "Ref": "itsccoelab02pubazallrt"
+        }
+      }
+    },
+    "PublicSubnetRouteTableAssociation2": {
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+      "Properties": {
+        "SubnetId": {
+          "Ref": "itsccoelab02pubazbdmz"
+        },
+        "RouteTableId": {
+          "Ref": "itsccoelab02pubazallrt"
+        }
+      }
+    },
+    "PrivateSubnetRouteTableAssociation1": {
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+      "Properties": {
+        "SubnetId": {
+          "Ref": "itsccoelab02priazaapp"
+        },
+        "RouteTableId": {
+          "Ref": "itsccoelab02priazart"
+        }
+      }
+    },
+    "PrivateSubnetRouteTableAssociation2": {
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+      "Properties": {
+        "SubnetId": {
+          "Ref": "itsccoelab02priazadb"
+        },
+        "RouteTableId": {
+          "Ref": "itsccoelab02priazart"
+        }
+      }
+    },
+    "PrivateSubnetRouteTableAssociation3": {
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+      "Properties": {
+        "SubnetId": {
+          "Ref": "itsccoelab02priazbapp"
+        },
+        "RouteTableId": {
+          "Ref": "itsccoelab02priazbrt"
+        }
+      }
+    },
+    "PrivateSubnetRouteTableAssociation4": {
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+      "Properties": {
+        "SubnetId": {
+          "Ref": "itsccoelab02priazbdb"
+        },
+        "RouteTableId": {
+          "Ref": "itsccoelab02priazbrt"
+        }
+      }
+    }
+  },
+
+  "Parameters": {
+    "InputCCoESolutionId": {
+      "Description": "ccoe-solution-id",
+      "Type": "String",
+      "Default": "ccoelab02-initialization"
+    },
+    "InputLabName": {
+      "Description": "InputLabName",
+      "Type": "String",
+      "Default": "My Name Lab 02"
+    }
+  }
+}
