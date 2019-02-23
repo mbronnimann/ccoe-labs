@@ -1,0 +1,57 @@
+{
+  "AWSTemplateFormatVersion" : "2010-09-09",
+
+  "Description" : "AWS CloudFormation an encrypted S3 bucket with versioning enabled and an SNS topic for notifications for our Bitbucket uploads.",
+
+  "Parameters" : {
+    "s3bucketname": {
+        "Description" : "The S3 Bucket Name",
+        "Type" : "String",
+        "MinLength" : "1",
+        "MaxLength" : "64",
+        "Default" : "farmbucket",
+        "ConstraintDescription": "An S3 compliant name"
+    },
+    "whocreatedme": {
+        "Description" : "Owner Name",
+        "Type" : "String",
+        "MinLength" : "1",
+        "MaxLength" : "64",
+        "Default" : "mark",
+        "ConstraintDescription": "Your name"
+    }
+  },
+
+  "Resources" : {
+    "farmtotablebucket": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "BucketName": {
+            "Fn::Join": [
+              "-", [
+                {"Ref": "s3bucketname"},
+                "farm2table-lab"
+              ]
+            ]
+          },
+          "BucketEncryption": {
+          "ServerSideEncryptionConfiguration": [
+            {
+              "ServerSideEncryptionByDefault": {
+                "SSEAlgorithm": "AES256"
+              }
+            }]
+          },
+          "VersioningConfiguration": {
+            "Status": "Enabled"
+          },
+          "Tags": [
+            {
+              "Key": "Owner",
+              "Value": {"Ref": "whocreatedme"}
+            }
+          ]
+      }
+    }
+  }
+}
